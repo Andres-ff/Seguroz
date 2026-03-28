@@ -8,7 +8,7 @@ const insuranceTypes = [
     title: 'Seguro de Hogar Digital',
     description: 'Protección inteligente para tu hogar con monitoreo avanzado y prevención proactiva.',
     features: ['Monitoreo IoT', 'Alertas automáticas', 'Prevención inteligente', 'Asistencia 24/7'],
-    image: 'https://images.unsplash.com/photo-1721042235332-45f89689cfba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGZhbWlseSUyMGhvbWUlMjBpbnN1cmFuY2V8ZW58MXx8fHwxNzczMzAwODc0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh1AdtlD8hcb-yqgrdcAmTAg7p-6LI-o2hCA&s',
     color: 'from-blue-500 to-blue-600',
   },
   {
@@ -49,7 +49,7 @@ export function InsuranceTypes() {
           transition={{ duration: 0.6 }}
         >
           <span className="text-blue-600 font-semibold text-sm uppercase tracking-wide">
-            Nuestros servicios
+            Nuestros aliados
           </span>
           <h2 className="text-4xl lg:text-5xl mt-3 mb-4 text-slate-900">
             Seguros para el mundo moderno

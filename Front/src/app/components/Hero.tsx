@@ -1,12 +1,18 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Shield } from 'lucide-react';
 import { Button } from './ui/button';
+import { useContent } from '../context/ContentContext';
 
 export function Hero() {
+  const { content } = useContent();
+  const heroData = content.hero;
+
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
       {/* Animated background circles */}
       <motion.div
+  //...
+
         className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"
         animate={{
           scale: [1, 1.2, 1],
@@ -58,7 +64,7 @@ export function Hero() {
           >
             <Shield className="w-4 h-4 text-blue-600" />
             <span className="text-sm font-medium text-slate-700">
-              Tecnología de protección avanzada
+              Soluciones innovadoras
             </span>
           </motion.div>
 
@@ -68,10 +74,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            El futuro de los{' '}
-            <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-blue-700 bg-clip-text text-transparent">
-              seguros inteligentes
-            </span>
+            {heroData.title}
           </motion.h1>
 
           <motion.p
@@ -80,8 +83,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            Protección inteligente impulsada por tecnología avanzada. Cobertura instantánea, 
-            gestión automatizada y tranquilidad garantizada para el mundo moderno.
+            {heroData.subtitle}
           </motion.p>
 
           <motion.div
@@ -93,9 +95,6 @@ export function Hero() {
             <Button size="lg" className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-900 text-white px-8 py-6 text-lg group border-0 shadow-lg shadow-blue-500/25">
               Cotizar ahora
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="outline" className="px-8 py-6 text-lg border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-blue-400">
-              Explorar planes
             </Button>
           </motion.div>
 
@@ -111,8 +110,8 @@ export function Hero() {
               <div className="text-sm text-slate-600">Clientes activos</div>
             </div>
             <div>
-              <div className="text-3xl text-blue-600 mb-1">98%</div>
-              <div className="text-sm text-slate-600">Satisfacción</div>
+              <div className="text-3xl text-blue-600 mb-1">+3</div>
+              <div className="text-sm text-slate-600"> Soluciones a tu disposición</div>
             </div>
             <div>
               <div className="text-3xl text-blue-600 mb-1">24/7</div>

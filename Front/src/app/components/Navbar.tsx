@@ -20,8 +20,8 @@ export function Navbar() {
   );
 
   const menuItems = [
-    { label: 'Seguros', href: '#seguros' },
-    { label: 'Tecnología', href: '#tecnologia' },
+    { label: 'Porque elegirnos', href: '#seguros' },
+    { label: 'Soluciones', href: '#tecnologia' },
     { label: 'Testimonios', href: '#testimonios' },
     { label: 'Contacto', href: '#contacto' },
   ];

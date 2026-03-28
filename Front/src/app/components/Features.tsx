@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Shield, Clock, Users, Award, HeadphonesIcon, Lock } from 'lucide-react';
+import { useContent } from '../context/ContentContext';
 
 const features = [
   {
@@ -41,6 +42,8 @@ const features = [
 ];
 
 export function Features() {
+  const { content } = useContent();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -90,29 +93,33 @@ export function Features() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              className="group"
-            >
-              <div className="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 h-full">
-                <motion.div
-                  className={`w-14 h-14 bg-gradient-to-br from-${feature.color}-500 to-${feature.color}-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-${feature.color}-500/20`}
-                  whileHover={{ rotate: 5 }}
-                >
-                  <feature.icon className="w-7 h-7 text-white" />
-                </motion.div>
-                <h3 className="text-xl mb-3 text-slate-900">
-                  {feature.title}
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+          {content.features.map((featureData, index) => {
+            const originalFeature = features[index] || features[0];
+            const Icon = originalFeature.icon;
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                className="group"
+              >
+                <div className="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 h-full">
+                  <motion.div
+                    className={`w-14 h-14 bg-gradient-to-br from-${originalFeature.color}-500 to-${originalFeature.color}-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-${originalFeature.color}-500/20`}
+                    whileHover={{ rotate: 5 }}
+                  >
+                    <Icon className="w-7 h-7 text-white" />
+                  </motion.div>
+                  <h3 className="text-xl mb-3 text-slate-900">
+                    {featureData.title}
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    {featureData.description}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
