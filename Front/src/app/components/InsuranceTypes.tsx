@@ -1,6 +1,14 @@
 import { motion } from 'motion/react';
 import { Home, Car, Heart, Briefcase } from 'lucide-react';
 import { Button } from './ui/button';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from './ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 
 const insuranceTypes = [
   {
@@ -37,94 +45,52 @@ const insuranceTypes = [
   },
 ];
 
+const allies = [
+  { name: 'A Colpatria', logo: '/SegurosLogos/AColpatria.jpeg' },
+  { name: 'Chubb', logo: '/SegurosLogos/Chubb.jpeg' },
+  { name: 'Colmena', logo: '/SegurosLogos/Colmena.png' },
+  { name: 'HDI', logo: '/SegurosLogos/HDI.jpeg' },
+  { name: 'S Bolivar', logo: '/SegurosLogos/SBolivar.jpeg' },
+  { name: 'S Mundial', logo: '/SegurosLogos/SMundial.jpeg' },
+  { name: 'Sura', logo: '/SegurosLogos/Sura.jpeg' },
+  { name: 'Zurich', logo: '/SegurosLogos/Zurich.jpeg' },
+];
+
 export function InsuranceTypes() {
   return (
-    <section id="seguros" className="py-24 bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-blue-600 font-semibold text-sm uppercase tracking-wide">
-            Nuestros aliados
-          </span>
-          <h2 className="text-4xl lg:text-5xl mt-3 mb-4 text-slate-900">
-            Seguros para el mundo moderno
-          </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Soluciones innovadoras que evolucionan con las necesidades de hoy
-          </p>
-        </motion.div>
+    <>
+      <section className="pb-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl lg:text-5xl mt-3 mb-4 text-slate-900">
+              Nuestros Aliados
+            </h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              Empresas que confían en nosotros
+            </p>
+          </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {insuranceTypes.map((insurance, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 border border-slate-200 hover:border-blue-300"
-            >
-              {/* Image */}
-              <div className="relative h-64 overflow-hidden">
-                <motion.img
-                  src={insurance.image}
-                  alt={insurance.title}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${insurance.color} opacity-60`} />
-                
-                {/* Icon */}
-                <motion.div
-                  className="absolute top-6 left-6 w-16 h-16 bg-white/95 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg border border-blue-100"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <insurance.icon className="w-8 h-8 text-blue-600" />
-                </motion.div>
-              </div>
-
-              {/* Content */}
-              <div className="p-8">
-                <h3 className="text-2xl mb-3 text-slate-900">
-                  {insurance.title}
-                </h3>
-                <p className="text-slate-600 mb-6">
-                  {insurance.description}
-                </p>
-
-                {/* Features */}
-                <ul className="space-y-2 mb-6">
-                  {insurance.features.map((feature, idx) => (
-                    <motion.li
-                      key={idx}
-                      className="flex items-center text-slate-700"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: idx * 0.1 }}
-                    >
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3" />
-                      {feature}
-                    </motion.li>
-                  ))}
-                </ul>
-
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white transition-all duration-300 border-0 shadow-lg shadow-blue-500/20">
-                  Obtener cotización
-                </Button>
-              </div>
-            </motion.div>
-          ))}
+          <Carousel className="w-full max-w-5xl mx-auto" plugins={[Autoplay({ delay: 3000, stopOnInteraction: false })]}>
+            <CarouselContent className="-ml-1">
+              {allies.map((ally, index) => (
+                <CarouselItem key={index} className="pl-1 md:basis-1/3 lg:basis-1/5">
+                  <div className="p-1">
+                    <img src={ally.logo} alt={ally.name} className="w-full h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300" style={{ mixBlendMode: 'multiply' }} />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

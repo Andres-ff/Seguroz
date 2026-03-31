@@ -140,24 +140,15 @@ export function Hero() {
             <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-blue-600/20" />
           </motion.div>
 
-          {/* Floating card */}
+          {/* Floating logo */}
           <motion.div
-            className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-xl p-6 rounded-2xl shadow-xl shadow-blue-500/20 max-w-xs border border-blue-100"
+            className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/90 rounded-full flex items-center justify-center shadow-lg border border-blue-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1 }}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, rotate: 360 }}
           >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
-                <Shield className="w-6 h-6 text-white" />
-                {/* <img src="/LOGO_METAL2.png" /> */}
-              </div>
-              <div>
-                <div className="text-sm text-slate-600">Protección activa</div>
-                <div className="text-lg text-slate-900">100% seguro</div>
-              </div>
-            </div>
+            <img src="/LOGO_METAL2.png" className="w-20 h-20 object-contain" />
           </motion.div>
         </motion.div>
       </div>

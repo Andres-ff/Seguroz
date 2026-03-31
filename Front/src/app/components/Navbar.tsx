@@ -47,13 +47,13 @@ export function Navbar() {
             whileHover={{ scale: 1.05 }}
           >
             <motion.div
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
+              className="w-16 h-16 rounded-xl flex items-center justify-center"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
             >
               {/* <Shield className="w-6 h-6 text-white" />
                     <span className="absolute text-white font-black text-[10px] leading-none mt-0.5">T</span> */}
-                    <img src="/LOGO_METAL2.png" />
+                    <img src="/LOGO_METAL2.png" className="w-full h-full object-contain" />
             </motion.div>
             <span className="text-2xl text-slate-900">Tu Tranquilidad</span>
           </motion.a>

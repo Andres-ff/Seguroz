@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
-const benefits = [
-  'Análisis avanzado y cotización personalizada en minutos',
-  'Activación inmediata sin complicaciones ni trámites',
-  'Asesor digital disponible las 24 horas del día',
-  'Comparación inteligente entre todos nuestros planes',
-];
+// const benefits = [
+//   'Análisis avanzado y cotización personalizada en minutos',
+//   'Activación inmediata sin complicaciones ni trámites',
+//   'Asesor digital disponible las 24 horas del día',
+//   'Comparación inteligente entre todos nuestros planes',
+// ];
 
 export function CTA() {
   const [fullName, setFullName] = useState('');
@@ -85,11 +85,11 @@ export function CTA() {
             ¿Listo para proteger tu futuro?
           </h2>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Obtén una cotización personalizada con tecnología avanzada en tiempo real
+             Escribemos y te contactamos para entregarte una solución ajustada a tus necesidades
           </p>
         </motion.div>
 
-        <motion.div
+        {/* <motion.div
           className="grid md:grid-cols-2 gap-4 mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ export function CTA() {
               <span className="text-lg">{benefit}</span>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl"
