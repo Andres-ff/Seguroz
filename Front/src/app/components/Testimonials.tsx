@@ -43,7 +43,7 @@ export function Testimonials() {
             Lo que dicen nuestros clientes
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Experiencias reales de quienes confían en nuestra tecnología
+            Experiencias reales de quienes confían en nuestros servicios
           </p>
         </motion.div>
 

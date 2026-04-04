@@ -20,7 +20,7 @@ export function Navbar() {
   );
 
   const menuItems = [
-    { label: 'Porque elegirnos', href: '#seguros' },
+    { label: 'Porque elegirnos', href: '#nosotros' },
     { label: 'Soluciones', href: '#tecnologia' },
     { label: 'Testimonios', href: '#testimonios' },
     { label: 'Contacto', href: '#contacto' },
@@ -88,9 +88,11 @@ export function Navbar() {
               <Phone className="w-4 h-4" />
               <span>+57 3166239919</span>
             </a>
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white border-0 shadow-lg shadow-blue-500/20">
-              Cotizar ahora
-            </Button>
+            <a href="#contacto">
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white border-0 shadow-lg shadow-blue-500/20">
+                Cotizar ahora
+              </Button>
+            </a>
           </motion.div>
 
           {/* Mobile Menu Button */}
@@ -126,9 +128,11 @@ export function Navbar() {
                   {item.label}
                 </motion.a>
               ))}
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white mt-4 border-0">
-                Cotizar ahora
-              </Button>
+              <a href="#contacto" onClick={() => setIsOpen(false)} className="w-full">
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white mt-4 border-0">
+                  Cotizar ahora
+                </Button>
+              </a>
             </div>
           </motion.div>
         )}

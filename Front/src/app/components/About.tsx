@@ -34,21 +34,23 @@ export function About() {
 
           <div className="flex h-full flex-col rounded-3xl bg-white p-8 border border-slate-200 shadow-sm">
             <h3 className="text-2xl font-semibold text-slate-900 mb-4">Por qué elegirnos</h3>
-            <p className="text-slate-600 leading-relaxed mb-6">
-              En Tu Tranquilidad en Seguros Ltda. cambiamos la forma de proteger lo que más le importa.
-              Más que intermediarios, somos sus consultores de confianza, acompañándolo mucho más allá de una póliza.
-            </p>
-            <ul className="mt-auto space-y-4 text-slate-600">
-              <li>
-                <strong className="text-slate-900">Agilidad sin rodeos:</strong> Olvídese de trámites complicados. Le ofrecemos respuestas rápidas y soluciones a su medida.
-              </li>
-              <li>
-                <strong className="text-slate-900">Presentes cuando más nos necesita:</strong> Si ocurre un imprevisto, nosotros tomamos las riendas y nos encargamos de todo ante la aseguradora.
-              </li>
-              <li>
-                <strong className="text-slate-900">Cercanía y eficiencia:</strong> Queremos proteger lo que usted valora con atención humana y procesos claros.
-              </li>
-            </ul>
+            <div className="flex-1 overflow-hidden">
+              <p className="text-slate-600 leading-relaxed mb-6">
+                En Tu Tranquilidad en Seguros Ltda. cambiamos la forma de proteger lo que más le importa.
+                Más que intermediarios, somos sus consultores de confianza, acompañándolo mucho más allá de una póliza.
+              </p>
+              <ul className="space-y-4 text-slate-600 max-h-56 overflow-y-auto pr-2">
+                <li>
+                  <strong className="text-slate-900">Agilidad sin rodeos:</strong> Olvídese de trámites complicados. Le ofrecemos respuestas rápidas y soluciones a su medida.
+                </li>
+                <li>
+                  <strong className="text-slate-900">Presentes cuando más nos necesita:</strong> Si ocurre un imprevisto, nosotros tomamos las riendas y nos encargamos de todo ante la aseguradora.
+                </li>
+                <li>
+                  <strong className="text-slate-900">Cercanía y eficiencia:</strong> Queremos proteger lo que usted valora con atención humana y procesos claros.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
