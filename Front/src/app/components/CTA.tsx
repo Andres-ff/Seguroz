@@ -15,7 +15,8 @@ export function CTA() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [insuranceType, setInsuranceType] = useState('Tipo de seguro');
+  const [insuranceType, setInsuranceType] = useState('');
+  const [extraInfo, setExtraInfo] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -28,7 +29,7 @@ export function CTA() {
       const response = await fetch('http://localhost:3001/api/cotizacion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName, email, phone, insuranceType }),
+        body: JSON.stringify({ fullName, email, phone, insuranceType, extraInfo }),
       });
 
       if (!response.ok) {
@@ -40,7 +41,8 @@ export function CTA() {
       setFullName('');
       setEmail('');
       setPhone('');
-      setInsuranceType('Tipo de seguro');
+      setInsuranceType('');
+      setExtraInfo('');
     } catch (err) {
       setStatus('error');
       setErrorMsg(
@@ -156,18 +158,74 @@ export function CTA() {
                 <select
                   className="w-full bg-white/95 border border-white/30 rounded-md px-4 py-3 text-lg text-slate-900"
                   value={insuranceType}
-                  onChange={(e) => setInsuranceType(e.target.value)}
+                  onChange={(e) => {
+                    setInsuranceType(e.target.value);
+                    setExtraInfo('');
+                  }}
+                  required
                 >
-                  <option>Tipo de seguro</option>
-                  <option>Hogar Digital</option>
-                  <option>Auto Avanzado</option>
-                  <option>Salud Integral</option>
+                  <option value="" disabled>
+                    Tipo de seguro
+                  </option>
+                  <option>Vida</option>
+                  <option>Salud</option>
+                  <option>Autos</option>
+                  <option>Hogar</option>
                   <option>Empresarial</option>
+                  <option>Cumplimiento</option>
+                  <option>RC</option>
+                  <option>Otro</option>
                 </select>
               </motion.div>
             </div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.9 }}>
+            {insuranceType && (
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.9 }}>
+                <Input
+                  type="text"
+                  placeholder={
+                    insuranceType === 'Autos'
+                      ? 'Placa del vehículo'
+                      : insuranceType === 'Hogar'
+                      ? 'Dirección del inmueble'
+                      : insuranceType === 'Salud'
+                      ? 'Edad o rango de edad'
+                      : insuranceType === 'Vida'
+                      ? 'Edad o beneficiario'
+                      : insuranceType === 'Empresarial'
+                      ? 'Actividad o número de empleados'
+                      : insuranceType === 'Cumplimiento'
+                      ? 'Tipo de contrato / garantía'
+                      : insuranceType === 'RC'
+                      ? 'Actividad asegurada'
+                      : 'Describe brevemente tu solicitud'
+                  }
+                  value={extraInfo}
+                  onChange={(e) => setExtraInfo(e.target.value)}
+                  required
+                  className="w-full bg-white/95 border border-white/30 py-6 px-4 text-lg text-slate-900 placeholder:text-slate-500"
+                />
+                <p className="mt-2 text-sm text-blue-100">
+                  {insuranceType === 'Autos'
+                    ? 'Para seguros de auto, por favor incluya la placa del vehículo.'
+                    : insuranceType === 'Hogar'
+                    ? 'Indica la dirección o ciudad del inmueble que deseas asegurar.'
+                    : insuranceType === 'Salud'
+                    ? 'Indica la edad o rango de edad de la persona a asegurar.'
+                    : insuranceType === 'Vida'
+                    ? 'Es útil saber la edad o el beneficiario de la póliza.'
+                    : insuranceType === 'Empresarial'
+                    ? 'Indica el tipo de negocio o número aproximado de empleados.'
+                    : insuranceType === 'Cumplimiento'
+                    ? 'Describe el tipo de contrato o garantía que necesitas.'
+                    : insuranceType === 'RC'
+                    ? 'Describe la actividad o el riesgo que quieres cubrir.'
+                    : 'Cuéntanos brevemente tu caso para que podamos cotizar mejor.'}
+                </p>
+              </motion.div>
+            )}
+
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.0 }}>
               <Button
                 size="lg"
                 type="submit"

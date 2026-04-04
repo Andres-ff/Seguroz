@@ -1,5 +1,6 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { About } from './components/About';
 import { Features } from './components/Features';
 import { InsuranceTypes } from './components/InsuranceTypes';
 import { Stats } from './components/Stats';
@@ -14,6 +15,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <About />
         <Features />
         <InsuranceTypes />
         <Stats />
