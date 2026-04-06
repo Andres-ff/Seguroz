@@ -57,6 +57,35 @@ app.post('/api/cotizacion', async (req, res) => {
   }
 });
 
+app.post('/api/testimonials', async (req, res) => {
+  const { name, role, content, rating } = req.body;
+
+  if (!name || !role || !content || !rating) {
+    return res.status(400).json({ message: 'Nombre, cargo, descripción y estrellas son requeridos.' });
+  }
+
+  try {
+    const db = await getDbConnection();
+    const row = await db.get('SELECT data_json FROM content WHERE section = ?', ['testimonials']);
+    const testimonials = row ? JSON.parse(row.data_json) : [];
+    const newTestimonial = {
+      id: Date.now(),
+      name,
+      role,
+      content,
+      rating: Number(rating),
+      active: false,
+      createdAt: new Date().toISOString(),
+    };
+    testimonials.push(newTestimonial);
+    await db.run('REPLACE INTO content (section, data_json) VALUES (?, ?)', ['testimonials', JSON.stringify(testimonials)]);
+    return res.status(201).json({ message: 'Testimonio enviado correctamente.', testimonial: newTestimonial });
+  } catch (err) {
+    console.error('Error guardando testimonio:', err);
+    return res.status(500).json({ message: 'Error al guardar el testimonio.' });
+  }
+});
+
 app.post('/api/admin/login', (req, res) => {
   const { password } = req.body;
   if (password === ADMIN_PASSWORD) {

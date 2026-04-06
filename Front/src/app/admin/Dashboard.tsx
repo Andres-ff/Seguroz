@@ -2,6 +2,15 @@ import { useState, useEffect } from 'react';
 import { useContent } from '../context/ContentContext';
 import { useNavigate } from 'react-router';
 
+type TestimonialItem = {
+  id: number;
+  name: string;
+  role: string;
+  content: string;
+  rating: number;
+  active: boolean;
+};
+
 export function Dashboard() {
   const { content, refreshContent } = useContent();
   const navigate = useNavigate();
@@ -9,6 +18,7 @@ export function Dashboard() {
   const [heroTitle, setHeroTitle] = useState(content.hero.title);
   const [heroSubtitle, setHeroSubtitle] = useState(content.hero.subtitle);
   const [featuresList, setFeaturesList] = useState(content.features);
+  const [testimonialsList, setTestimonialsList] = useState<TestimonialItem[]>(content.testimonials || []);
   const [message, setMessage] = useState('');
 
   // Secure route
@@ -23,6 +33,7 @@ export function Dashboard() {
     setHeroTitle(content.hero.title);
     setHeroSubtitle(content.hero.subtitle);
     setFeaturesList(content.features);
+    setTestimonialsList(content.testimonials || []);
   }, [content]);
 
   const saveHero = async () => {
@@ -79,6 +90,53 @@ export function Dashboard() {
       setMessage('Error de conexión');
     }
     setTimeout(() => setMessage(''), 3000);
+  };
+
+  const saveTestimonials = async () => {
+    setMessage('Guardando testimonios...');
+    try {
+      const res = await fetch('http://localhost:3001/api/content/testimonials', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
+        },
+        body: JSON.stringify(testimonialsList)
+      });
+      if (res.ok) {
+        setMessage('Testimonios guardados exitosamente!');
+        refreshContent();
+      } else {
+        setMessage('Error al guardar testimonios');
+      }
+    } catch(e) {
+      setMessage('Error de conexión');
+    }
+    setTimeout(() => setMessage(''), 3000);
+  };
+
+  const addTestimonial = () => {
+    setTestimonialsList(prev => [
+      ...prev,
+      {
+        id: Date.now(),
+        name: '',
+        role: '',
+        content: '',
+        rating: 5,
+        active: false,
+      }
+    ]);
+  };
+
+  const handleTestimonialChange = (index: number, field: keyof TestimonialItem, value: TestimonialItem[keyof TestimonialItem]) => {
+    const next = [...testimonialsList];
+    next[index] = { ...next[index], [field]: value } as TestimonialItem;
+    setTestimonialsList(next);
+  };
+
+  const removeTestimonial = (index: number) => {
+    setTestimonialsList(prev => prev.filter((_, idx) => idx !== index));
   };
 
   const handleLogout = () => {
@@ -150,6 +208,93 @@ export function Dashboard() {
           className="mt-6 bg-blue-600 text-white font-medium px-6 py-2 rounded-lg hover:bg-blue-700 shadow-sm"
         >
           Guardar Todas las Características
+        </button>
+      </div>
+
+      {/* Editor Testimonials */}
+      <div className="mb-8 p-6 border rounded-xl bg-slate-50">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-4">
+          <div>
+            <h3 className="text-xl font-bold">Testimonios</h3>
+            <p className="text-sm text-slate-600">Selecciona hasta 3 testimonios para mostrar en la página.</p>
+          </div>
+          <button 
+            onClick={addTestimonial}
+            className="bg-blue-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-blue-700 shadow-sm"
+          >
+            Nuevo Testimonio
+          </button>
+        </div>
+
+        <div className="space-y-4">
+          {testimonialsList.map((testimonial, index) => (
+            <div key={testimonial.id ?? index} className="bg-white p-4 rounded-lg border shadow-sm">
+              <div className="grid gap-4 md:grid-cols-[1.5fr_1fr] lg:grid-cols-[1.5fr_0.8fr]">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <label className="block text-sm text-slate-500 mb-1">Nombre</label>
+                    <input
+                      className="w-full border border-slate-200 p-2 rounded text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+                      value={testimonial.name}
+                      onChange={(e) => handleTestimonialChange(index, 'name', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-slate-500 mb-1">Cargo</label>
+                    <input
+                      className="w-full border border-slate-200 p-2 rounded text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+                      value={testimonial.role}
+                      onChange={(e) => handleTestimonialChange(index, 'role', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-slate-500 mb-1">Calificación</label>
+                    <select
+                      className="w-full border border-slate-200 p-2 rounded text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+                      value={testimonial.rating}
+                      onChange={(e) => handleTestimonialChange(index, 'rating', Number(e.target.value))}
+                    >
+                      {[5, 4, 3, 2, 1].map((value) => (
+                        <option key={value} value={value}>{value} estrellas</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className="block text-sm text-slate-500 mb-1">Descripción</label>
+                    <textarea
+                      className="w-full border border-slate-200 p-2 rounded h-28 text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+                      value={testimonial.content}
+                      onChange={(e) => handleTestimonialChange(index, 'content', e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col justify-between gap-4">
+                  <label className="inline-flex items-center gap-2 text-sm text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={testimonial.active}
+                      onChange={(e) => handleTestimonialChange(index, 'active', e.target.checked)}
+                      className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    Mostrar en página
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => removeTestimonial(index)}
+                    className="text-rose-600 hover:text-rose-800 text-sm font-medium self-start"
+                  >Eliminar</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button
+          onClick={saveTestimonials}
+          className="mt-6 bg-blue-600 text-white font-medium px-6 py-2 rounded-lg hover:bg-blue-700 shadow-sm"
+        >
+          Guardar Testimonios
         </button>
       </div>
     </div>

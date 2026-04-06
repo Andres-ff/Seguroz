@@ -15,7 +15,8 @@ const defaultContent = {
     { title: 'Cobertura Nacional', description: 'Nuestra red de proveedores médicos te protege en todo México.' },
     { title: 'Trámites Ágiles', description: 'Simplificamos los procesos para que obtengas tu seguro sin complicaciones.' },
     { title: 'Respaldo Confiable', description: 'Trabajamos con las aseguradoras más sólidas y prestigiosas del país.' }
-  ]
+  ],
+  testimonials: []
 };
 
 export async function getDbConnection() {

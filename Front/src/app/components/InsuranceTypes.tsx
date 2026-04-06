@@ -46,14 +46,14 @@ const insuranceTypes = [
 ];
 
 const allies = [
-  { name: 'A Colpatria', logo: '/SegurosLogos/AColpatria.jpeg' },
-  { name: 'Chubb', logo: '/SegurosLogos/Chubb.jpeg' },
-  { name: 'Colmena', logo: '/SegurosLogos/Colmena.png' },
-  { name: 'HDI', logo: '/SegurosLogos/HDI.jpeg' },
-  { name: 'S Bolivar', logo: '/SegurosLogos/SBolivar.jpeg' },
-  { name: 'S Mundial', logo: '/SegurosLogos/SMundial.jpeg' },
-  { name: 'Sura', logo: '/SegurosLogos/Sura.jpeg' },
-  { name: 'Zurich', logo: '/SegurosLogos/Zurich.jpeg' },
+  { name: 'A Colpatria', logo: '/SegurosLogos/AColpatria.jpeg', url: 'https://www.axacolpatria.co/sac/contactanos' },
+  { name: 'Chubb', logo: '/SegurosLogos/Chubb.jpeg', url: 'https://www.chubb.com/co-es/' },
+  { name: 'Colmena', logo: '/SegurosLogos/Colmena.png', url: 'https://www.colmenaseguros.com/' },
+  { name: 'HDI', logo: '/SegurosLogos/HDI.jpeg', url: 'https://www.hdiseguros.com.co/' },
+  { name: 'S Bolivar', logo: '/SegurosLogos/SBolivar.jpeg', url: 'https://www.segurosbolivar.com/' },
+  { name: 'S Mundial', logo: '/SegurosLogos/SMundial.jpeg', url: 'https://www.segurosmundial.com.co/personas/' },
+  { name: 'Sura', logo: '/SegurosLogos/Sura.jpeg', url: 'https://www.sura.co/' },
+  { name: 'Zurich', logo: '/SegurosLogos/Zurich.jpeg', url: 'https://www.zurichseguros.com.co/' },
 ];
 
 export function InsuranceTypes() {
@@ -81,7 +81,19 @@ export function InsuranceTypes() {
               {allies.map((ally, index) => (
                 <CarouselItem key={index} className="pl-1 md:basis-1/3 lg:basis-1/5">
                   <div className="p-1">
-                    <img src={ally.logo} alt={ally.name} className="w-full h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300" style={{ mixBlendMode: 'multiply' }} />
+                    <a
+                      href={ally.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <img
+                        src={ally.logo}
+                        alt={ally.name}
+                        className="w-full h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer"
+                        style={{ mixBlendMode: 'multiply' }}
+                      />
+                    </a>                  
                   </div>
                 </CarouselItem>
               ))}
