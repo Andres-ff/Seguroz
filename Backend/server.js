@@ -8,7 +8,7 @@ import { initDb, getDbConnection } from './db.js';
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key-123';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'TuTranquilidadAdmin2024';
 
 const app = express();
 app.use(cors({

@@ -6,6 +6,7 @@ import App from './App'
 import { AdminLayout } from './admin/AdminLayout'
 import { Login } from './admin/Login'
 import { Dashboard } from './admin/Dashboard'
+import { PrivacyPolicy } from './components/PrivacyPolicy'
 import { ContentProvider } from './context/ContentContext'
 
 createRoot(document.getElementById('root')!).render(
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
+          <Route path="/politica-privacidad" element={<PrivacyPolicy />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Navigate to="/admin/login" replace />} />
             <Route path="login" element={<Login />} />

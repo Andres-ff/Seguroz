@@ -1,33 +1,19 @@
 import { motion } from 'motion/react';
 import { Shield, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Link } from 'react-router';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
-    company: [
-      { label: 'Sobre nosotros', href: '#' },
-      { label: 'Innovación', href: '#' },
-      { label: 'Blog', href: '#' },
-      { label: 'Prensa', href: '#' },
-    ],
     services: [
       { label: 'Hogar Digital', href: '#' },
       { label: 'Auto Avanzado', href: '#' },
       { label: 'Salud Integral', href: '#' },
       { label: 'Empresarial', href: '#' },
     ],
-    support: [
-      { label: 'Centro de ayuda', href: '#' },
-      { label: 'Chat en vivo', href: '#' },
-      { label: 'FAQ', href: '#' },
-      { label: 'Contacto', href: '#' },
-    ],
     legal: [
-      { label: 'Privacidad', href: '#' },
-      { label: 'Términos', href: '#' },
-      { label: 'Seguridad', href: '#' },
-      { label: 'Compliance', href: '#' },
+      { label: 'Política de datos', href: '/politica-privacidad' },
     ],
   };
 
@@ -77,63 +63,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Company */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <h3 className="text-white mb-4">Compañía</h3>
-            <ul className="space-y-2">
-              {footerLinks.company.map((link, index) => (
-                <li key={index}>
-                  <a href={link.href} className="hover:text-blue-400 transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h3 className="text-white mb-4">Servicios</h3>
-            <ul className="space-y-2">
-              {footerLinks.services.map((link, index) => (
-                <li key={index}>
-                  <a href={link.href} className="hover:text-blue-400 transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Support */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <h3 className="text-white mb-4">Soporte</h3>
-            <ul className="space-y-2">
-              {footerLinks.support.map((link, index) => (
-                <li key={index}>
-                  <a href={link.href} className="hover:text-blue-400 transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
           {/* Legal */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -145,12 +74,32 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.legal.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="hover:text-blue-400 transition-colors">
+                  <Link to={link.href} className="hover:text-blue-400 transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
+          </motion.div>
+
+          {/* Map */}
+          <motion.div
+            className="lg:col-span-3"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <h3 className="text-white mb-4">Nuestra ubicación</h3>
+            <div className="overflow-hidden rounded-3xl border border-slate-800 shadow-xl shadow-slate-900/20">
+              <iframe
+                title="Ubicación de Tu Tranquilidad"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.189579366753!2d-74.85591728437295!3d10.968541592074508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42ad5f2a3f209%3A0xf3b7d9fd93a6dfe0!2sBarranquilla%2C%20Atl%C3%A1ntico%2C%20Colombia!5e0!3m2!1ses!2sus!4v1700000000000"
+                className="w-full h-72 border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </motion.div>
         </div>
 
